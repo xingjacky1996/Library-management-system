@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/media/images/bitbug_favicon.ico' %}"media="screen"/>
+    <script src="{% static 'media/js/jquery.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'media/css/style1.css'%}" />
+    <title>查询页面</title>
+</head>
+<style>
+    a:hover{
+        text-decoration: none;
+    }
+    ul{
+        list-style: none;
+        float: left;
+        width: 520px;
+    }
+    li{
+        list-style: none;
+    }
+
+    #tan{
+        width: 500px;
+        height: 450px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin:auto;
+        border:solid 2px #000;
+        border-radius: 10px;
+        background-color: #A3A380;
+        font-size: 20px;
+        color: bisque;
+        display: flex;
+        display: none;
+        flex-direction: column;
+    }
+    #wen{
+        position: absolute;
+        font-size: 20px;
+    }
+    #xuan{
+        width: 160px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    #jieinfocheck{
+        width: 400px;
+        display: none;
+        margin: 0 auto;
+    }
+    #table{
+        width: 800px;
+        height: auto;
+        position: absolute;
+        background-color: #E2DBBE;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin:auto;
+        border-radius: 10px;
+    }
+    #title{
+        width: 140px;
+        font-size: 30px;
+        font-family:'Courier New', Courier, monospace;
+        font-weight:bold;
+        color: #000;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .loginbtn{
+        display: flex;
+    }
+    #jie{
+        border: none;
+        background-color: #FCD692;
+        border-radius: 10px;
+        font-size: 18px;
+        text-align: center;
+    }
+    #select{
+        width: auto;
+        margin: 0 auto;
+    }
+    #xuan2{
+        width: 160px;
+    }
+    #option{
+        margin: 0 auto;
+    }
+    .text-r{
+        height: 28px;
+        display: flex;
+        text-height: 28px;
+    }
+    #info{
+        width: 800px;
+        height: 900px;
+        background-color: #E2DBBE;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin:auto;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+    #title{
+        width: 180px;
+        font-size: 30px;
+        font-family:'Courier New', Courier, monospace;
+        font-weight:bold;
+        color: #000;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    #title div{
+        list-style: none;
+        float: left;
+        padding-right: 10px;
+        width: 250px;
+    }
+    .list{
+        height: 240px;
+        padding: 18px 0;
+    }
+    .headbar{
+        margin-bottom: 30px;
+    }
+</style>
+<body>
+        <div class="headbar">
+                <div class="container">
+                    <a href="/" class="brand" style="font-size: 30px; color: #fff; font-weight:bold; font-family:'Courier New', Courier, monospace;">求真图书馆</a>
+                    <div class="headrig">
+                        <a href="/shuju/" class="szlibdata">图书馆数据</a>
+                        <a href="/liaotian/" class="ask">询问图书馆员</a>
+    
+                        <div class="loginbtn">
+                                {% if username == '' and is_staff == False %}
+                                <li><a href="/login">登陆</a></li>
+                                <li><a href="/zhuce">注册</a></li>
+                                {% elif is_staff == True %}
+                                <li><a href="/admin">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% elif is_staff == False %}
+                                <li><a href="/reader">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% endif %}
+                        </div>
+
+                        <a href="/liuyan/" class="liu">给管理员留言</a>
+                    </div>
+                </div>
+            </div>
+       
+        <div id='info'> 
+            <div id="title">借阅情况表</div>
+            {% for line in jieinfo_list %}
+            <ul class = "list" value="{{ line.id }}">
+                <div class="text-r">借阅ID：
+                    <div class = 'uid'>{{ line.id }}</div>
+                </div>
+
+                <div class="text-r">用户名：
+                    <div class = 'uname'>{{ line.u_name }}</div>
+                </div>
+                
+                <div class="text-r">书名:
+                    <div class = 'bname'>{{ line.book_name }}</div>
+                </div>
+                
+                <div class="text-r">借书时间:
+                    <div class = 'c_date'>{{ line.c_time }}</div>
+                </div>
+                
+                <div class="text-r">借书天数:
+                    <div  class = 'j_time'>{{ line.j_time }}</div>
+                </div>
+                
+                <div class="text-r">规定还书时间:
+                    <div class = 'h_time'>{{ line.h_time }}</div>
+                </div>
+                
+                <div class="text-r">数量:
+                    <div class = 'b_num'>{{ line.book_num }}</div>
+                </div>
+                
+                <div class="text-r">操作:
+				    <button class="huan">还书</button>
+				    <button class="xu" value = "{{ line.id }}">续借</button>
+                </div>
+
+                <div class="row no-gutter" style="display:none">
+                    <div class="col-25 text-r">剩余库存:</div>
+                    <li class = "num" value = "{{ line.f_book_num }}"></li>
+                </div>
+            </ul>
+            {% endfor %}
+        </div>
+        
+            <div id="tan">
+                <span>您要续借多少天呢？请将天数输入下面的输入框</span>
+                <input type="text" id="xujietime">
+                <button class="submit" value="{{ line.id }}">确认借阅</button>
+                <div class = "h_time">{{ h_time }}</div>
+            </div>
+            {% if messages %}
+
+	<ul class="messages">
+
+	{% for message in messages %}
+
+
+		<!-- <li{%if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> -->
+	<script>
+		alert('{{ message }}')
+	</script>
+
+	{% endfor %}
+
+	</ul>
+
+	{% endif %}
+            
+</body>
+<script>
+
+    $('.list').each(function(i){
+        $('.huan').eq(i).click(function(){
+            
+            uname = $('.uname').eq(i).text()
+            bid = $('.uid').eq(i).text()
+            bname = $('.bname').eq(i).text()
+            c_date = $('.c_date').eq(i).text()
+            j_time = $('.j_time').eq(i).text()
+            h_time = $('.h_time').eq(i).text()
+            b_num = $('.b_num').eq(i).text()
+            f_b_num = $('.num').eq(i).val()+1
+
+            dd = new Date()
+            var y = dd.getFullYear();   
+            var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0  
+            var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate();//获取当前几号，不足10补0
+            huandate = y+"-"+m+"-"+d
+
+            $.ajax({
+                type: "POST",
+                url: "/huan/",
+                data: {
+                    username:uname,
+                    bname:bname,
+                    c_date:c_date,
+                    j_time:j_time,
+                    h_time:h_time,
+                    booknum:b_num,
+                    huandate:huandate,
+                    f_b_num:f_b_num
+                },
+                success: function (response) {
+                    $('.huan').eq(i).remove()
+                    alert("还书成功")
+                    window.location.reload()
+            }
+    });
+    }
+        )
+        $('.xu').eq(i).click(function(){
+            
+            $('#tan').show()
+
+            uname = $('.uname').eq(i).text()
+            bid = $('.uid').eq(i).text()
+            bname = $('.bname').eq(i).text()
+            c_date = $('.c_date').eq(i).text()
+            j_time = $('.j_time').eq(i).text()
+            h_time = $('.h_time').eq(i).text()
+            b_num = $('.b_num').eq(i).text()
+            f_b_num = $('.num').eq(i).val()+1
+
+            
+        });
+        $('.submit').eq(i).click(function(){
+            let xj_time = $("#xujietime").val()
+            let h_time = $('.h_time').eq(i).text()
+
+            //时间预处理
+            let xj_time_b = xj_time+"D"
+            let h_time_1 = h_time.split('-')
+            let h_time_2 = h_time_1[0] + h_time_1[1] + h_time_1[2]
+
+            //时间计算器
+            // 为String类型变量增加endWith方法用于判断字符串的结尾
+            String.prototype.endWith=function(endStr){
+                var d=this.length-endStr.length;
+                return (d>=0&&this.lastIndexOf(endStr)==d)
+            }
+            // 小于10的数字前加0
+            function formatSmallNum (num) {
+                var newnum = parseInt(num);
+                if (newnum<10) {		// 调整日小于10时的格式
+                    newnum = 0 + '' + newnum;
+                }
+                return newnum
+            }
+            var monthbs = [1,0,1,0,1,0,1,1,0,1,0,1]		// 定义月份的大小
+            // 处理加减月时，当日大于28时，将新的日在新的月份中合理化
+            function adjustNewDay (newyear, newmonth, newday) {
+                var newAdjustedDay = newday;
+                if (monthbs[newmonth-1]<1&&newday>28) {		// 将新的日在新的月份中合理化
+                    if (newmonth!=2) {							// 不是二月时
+                        newAdjustedDay = 30
+                    } else {
+                        if ((newyear % 4 == 0) && (newyear % 100 != 0 || newyear % 400 == 0)) {		// 二月时判断是否为闰年
+                            newAdjustedDay = 29
+                        } else {
+                            newAdjustedDay = 28
+                        }
+                    }
+                }
+                return newAdjustedDay;
+            }
+            // 获取当月份最大天数
+            function getMonthMaxDays (newyear, month) {
+                var newmonthdays = 31;
+                if (monthbs[month-1]<1) {
+                    if (month!=2) {
+                        newmonthdays = 30
+                    } else {
+                        if ((newyear % 4 == 0) && (newyear % 100 != 0 || newyear % 400 == 0)) {		// 二月时判断是否为闰年
+                            newmonthdays = 29
+                        } else {
+                            newmonthdays = 28
+                        }
+                    }
+                }
+                return newmonthdays;
+            }
+            // 用来计算增减天数的递归
+            function recursionDays (year, month, day, delayTime) {
+                var newyear = year;
+                var newmonth = month;
+                var newday = day + delayTime;
+                var newmonthdays = getMonthMaxDays(year, month);
+                if(newday<=newmonthdays){
+                    newmonth = formatSmallNum(newmonth)
+                    newday = formatSmallNum(newday)
+                    return newyear + "-" + newmonth + "-" + newday
+                } else {
+                    newmonthdays = getMonthMaxDays(year, month);	// 目标月最大天数
+                    newmonth = month + 1;
+                    newdelay = newday - newmonthdays;
+                    newday = 0;
+                    if (newmonth>12) {
+                        newyear = newyear + 1;
+                        newmonth = newmonth - 12;
+                    }
+                    return recursionDays(newyear, newmonth, newday, newdelay)
+                }
+            }
+            // 日期计算
+            function addTime(date, delay) {
+                var monthbs = [1,0,1,0,1,0,1,1,0,1,0,1]		// 定义月份的大小
+                var year = parseInt(date.substring(0, 4));	// 获取年
+                var month = parseInt(date.substring(4, 6));	// 获取月
+                var day = parseInt(date.substring(6, 8));	// 获取日
+                if (delay.endWith("M")) {					// 处理月份加
+                    delayTime = parseInt(delay.substring(0,delay.length-1))		// 获取要加的月数
+                    var newyear = year
+                    var newmonth = month + delayTime;
+                    var newday = day;
+                    if (newmonth > 12) {								// 月份加后大于12
+                        var newyear = newyear + 1;
+                        var newmonth = newmonth - 12;
+                    }
+                    newday = adjustNewDay(newyear, newmonth, newday);
+                    newmonth = formatSmallNum(newmonth);
+                    newday = formatSmallNum(newday);
+                    var newdate = newyear + "-" + newmonth + "-" + newday;		// 组装新日期
+                }
+                if (delay.endWith("D")) {					// 处理天数加
+                    delayTime = parseInt(delay.substring(0,delay.length-1))		// 获取要加的天数
+                    var newdate = recursionDays(year,month,day,delayTime);		// 通过递归方式计算delayTime天后的日期
+                }
+                return newdate;
+            }
+
+            let xj_time_a = addTime(h_time_2,xj_time_b)
+
+            j_time = $('.j_time').eq(i).text()
+            h_time = $('.h_time').eq(i).text()
+            
+            let j_time_n = Number(j_time) + Number(xj_time)
+
+            if (!(/(^[1-9]\d*$)/.test(xj_time))){
+                console.log(xj_time);
+                console.log(!(/(^[1-9]\d*$)/.test(xj_time)));
+                alert('请您在这里输入正整数。')
+            }
+
+
+            else if(xj_time>30){
+                alert("续借天数不能大于30天哦，亲。")
+            }
+            else{
+                $.ajax({
+                    type: "GET",
+                    url: "/xujie/",
+                    data: {
+                        bid:bid,
+                        h_time:h_time,
+                        j_time_n:j_time_n,
+                        xj_time_a:xj_time_a,
+                    },
+                    success:function(){
+                        alert('续借成功')
+                        window.location.reload()
+                    }
+                });
+            }
+            
+        })
+    })
+</script> 
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta content="default" name="apple-mobile-web-app-status-bar-style">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="browsermode" content="application">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="x5-page-mode" content="app">
+    <base target="_blank">
+    <title>询问管理员</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/media/images/bitbug_favicon.ico' %}"media="screen" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'media/css/chat.css' %}">
+    <script src="{% static 'media/js/jquery.js' %}"></script>
+</head>
+<body style="overflow-y:hidden">
+    <img style="width:100%;height:100%" src="{% static 'media/images/chatBack.jpg' %}">
+    <div class="abs cover contaniner">
+        <div class="abs cover pnl">
+            <div class="top pnl-head"></div>
+            <div class="abs cover pnl-body" id="pnlBody">
+                <div class="abs cover pnl-left">
+                    <div class="abs cover pnl-msgs scroll" id="show">
+                        <div class="msg min time" id="histStart">加载历史消息</div>
+                        <div class="pnl-list" id="hists">
+                            <!-- 历史消息 -->
+                        </div>
+                        <div class="pnl-list" id="msgs">
+                        </div>
+                        <div class="pnl-list hide" id="unreadLine">
+                            <div class="msg min time unread">未读消息</div>
+                        </div>
+                    </div>
+                    <div class="abs bottom pnl-text">
+                        <div class="abs top pnl-warn" id="pnlWarn">
+                            <div class="fl btns rel pnl-warn-free">
+                                <img src="{% static 'media/images/Smile.png' %}" class="kh warn-btn" title="表情" id="emojiBtn" />
+                                <img src="{% static 'media/images/pic.png' %}" class="kh warn-btn" title="截屏" id="emojiBtn" />
+                                <img src="{% static 'media/images/camera.png' %}" class="kh warn-btn" title="图片" id="emojiBtn" />
+                                <img src="{% static 'media/images/edit.png' %}" class="kh warn-btn" title="保存" id="emojiBtn" />
+                            </div>
+                        </div>
+                        <div class="abs cover pnl-input">
+                            <textarea class="scroll" id="text" wrap="hard" placeholder="在此输入文字信息..."></textarea>
+                            <div class="abs atcom-pnl scroll hide" id="atcomPnl">
+                                <ul class="atcom" id="atcom"></ul>
+                            </div>
+                        </div>
+                        <div class="abs br pnl-btn" id="submit" style="background-color: rgb(32, 196, 202); color: rgb(255, 255, 255);" onclick="SendMsg(document.getElementById('text').value)">发送</div>
+                    </div>
+                </div>
+                <div class="abs right pnl-right">
+                    <div class="slider-container hide"></div>
+                    <div class="pnl-right-content">
+                        <div class="pnl-tabs">
+                            <div class="tab-btn active" id="hot-tab">常见问题</div>
+                            <div class="tab-btn" id="rel-tab">相关问题</div>
+                        </div>
+                        <div class="pnl-hot">
+                            <ul class="rel-list unselect" id="hots">
+                                <!-- <li class="rel-item">这是一个问题，这是一个问题？</li> -->
+                            </ul>
+                        </div>
+                        <div class="pnl-rel" style="display: none;">
+                            <ul class="rel-list unselect" id="rels">
+                                <!-- <li class="rel-item">这是一个问题，这是一个问题？</li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+var xmlHttp
+
+function GetXmlHttpObject(){
+    var xmlHttp=null;
+    try{
+        // Firefox, Opera 8.0+, Safari
+        xmlHttp=new XMLHttpRequest();
+    }
+    catch(e){
+        // Internet Explorer
+        try{
+            xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e){
+            xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    }
+return xmlHttp;
+}
+    // 发送信息
+function SendMsg()
+{
+    var text = document.getElementById("text");
+        if (text.value == "" || text.value == null){
+            alert("发送信息为空，请输入！")
+        }
+        else{
+            AddMsg('default', SendMsgDispose(text.value));
+            Send(text.value)
+            text.value = "";
+        }              
+}
+// 发送的信息处理
+function SendMsgDispose(detail)
+{
+    detail = detail.replace("\n", "<br>").replace(" ", "&nbsp;")
+    return detail;
+}
+
+function Send(str){
+    if (str.length==0){
+        document.getElementById("txtHint").innerHTML="";
+        return;
+    }
+    xmlHttp=GetXmlHttpObject()
+    if (xmlHttp==null){
+        alert ("您的浏览器不支持AJAX！");
+        return;
+    }
+    var url="http://www.tuling123.com/openapi/api?key=bdb1d8f8b11e4c80bbd9ed2a80b39b11";
+
+    url=url+"&info="+str;
+
+    url=url+"&userid=1234" ;
+
+    xmlHttp.onreadystatechange=stateChanged;
+
+    xmlHttp.open("GET",url,true);
+
+    xmlHttp.send(null);
+}
+
+function stateChanged(rcontent){
+    if(xmlHttp.readyState==4){
+        let msg = eval('(' + xmlHttp.responseText + ')');
+        let rcontent = msg.text  
+        var rstr = CreadRmsg(rcontent)
+        var msgs = document.getElementById("msgs");
+        msgs.innerHTML = msgs.innerHTML + rstr
+    }
+}
+
+// 增加信息
+function AddMsg(user,content)
+{
+    var str = CreadMsg(user,content);
+    var msgs = document.getElementById("msgs");
+    msgs.innerHTML = msgs.innerHTML + str
+}
+
+// 生成内容
+function CreadMsg(user,content){
+    var str = "";
+        str = "<div class=\"msg guest\"><div class=\"msg-right\"><div class=\"msg-host headDefault\"></div><div class=\"msg-ball\" title=\"今天 17:52:06\">" + content + "</div></div></div>"
+    return str;
+}
+
+function CreadRmsg(rcontent){
+    var rstr = "";
+        rstr = "<div class=\"msg robot\"><div class=\"msg-left\"><div class=\"msg-host photo\" style=\"background-image: url(../Images/head.png)\"></div><div class=\"msg-ball\" title=\"今天 17:52:06\">" + rcontent + "</div></div></div>"
+    return rstr;
+}
+
+</script>
+</html>

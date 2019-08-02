@@ -1,0 +1,740 @@
+/* 开发人员调整的个别样式 */   
+/* 图书馆之城 */
+ 	/* 内容高度 */
+	.libcity-panel .mapArea {
+		width: 100%;
+		height: auto;
+	}
+	/* 内容列表滚动 */
+ 	.gonggao-list{
+		height:120px;
+		overflow: hidden;
+		border: 1px solid #EEEEEE;
+	}
+	/* 列表字体 */
+	.libs-list a{
+		/* color: #429CC1; */
+		font-size: 15px;
+	}
+	.col-33{padding: 0px 5px;}
+	/* 地图大小 */
+	#localtionMap{
+		width: 100%;
+	    height: 480px;
+	    margin:0;font-family:"微软雅黑";
+	}
+	/* 2016-03-23修改 */
+	/* 列表头 */
+	.libCity_list{
+		  margin: 0 auto;
+	}
+	.libCity_list .ls-title-tr1 {
+		width: 35%;
+		text-align: center;
+		position: relative;
+	}
+	.libCity_list .ls-title-tr2 {
+		width: 64%;
+		position: relative;
+	}
+	.libCity_list .ls-title{
+		border-radius: 0px;
+		background-color: #38b4e6;
+		position: relative;
+		height: 26px;
+		line-height: 25px;
+		font-size: 18px;
+		color: #fff;
+		margin-top: 5px;
+	}
+	.libCity_list .ls-title-tr2, .libCity_list .ls-title-tr1 {
+		float: left;
+		position: relative;
+		text-align: center;
+	}
+	.libCity_list .ls-title .pd-l-20 {
+		/* padding-left: 20px; */
+	}
+	/* 竖线 */
+	.libCity_list .ls-title .shuxian {
+		background-color: #ffffff;
+		position: absolute;
+		left: 0px;
+		top: 4px;
+		width: 1px;
+		height: 16px;
+	}
+	/* 列表头end */
+	.libCity_list .ls-title-tr1 .nameLink{
+	display: block;
+	}
+	/* 列表 */
+	.libCity_list .ls-contentlist li{
+		font-size:16px;
+		display: block;
+		padding: 10px 10px;
+		border-bottom: 1px dashed #7e7e7e;
+		list-style: none;
+		height: 20px;
+  		line-height: 20px;
+}
+	}
+	.libCity_list .ls-contentlist li h3{
+		font-size: 16px;
+		line-height: 25px;
+		color: #333;
+		padding-left: 20px;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		-o-text-overflow: ellipsis;
+		text-overflow: ellipsis;
+	}
+	.libCity_list .ls-contentlist .text{
+		color: #aaaaaa;
+		text-align: left;
+		margin-left: 10px;
+		
+	}
+	/* 列表end */
+	
+/* 服务网点列表begin */
+	.libs-list{
+		padding: 10px;
+	}
+/* 服务网点列表 end*/
+
+/* 借阅排行榜begin */
+	.box-filter {
+	  margin-bottom:0px;
+	}
+	.type_li{
+		font-size: 16px;
+	}
+	.f-type-list a {
+	  	font-size: 16px;
+	 	margin-bottom: 8px;
+	  	margin-right: 10px;
+	 	line-height: 28px;
+	    height: 30px;
+	}
+	#restype .open{
+	  display: block;
+	}
+	#restype .close{
+	  display: none;
+	}
+	.r-title {
+	  font-size: 16px;
+	}
+	.r-list{
+		font-size: 14px;
+	}
+	.rlist li {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.r-rank{
+		font-size: 16px;
+	}
+	.r-name{
+		font-size: 14px;
+		overflow: hidden;
+	}
+	.r-num{
+		font-size: 16px;
+	}
+	.sel-type1{
+		font-size: 18px;
+		width: 75px;
+  		height: 30px;
+	}
+/* 借阅排行榜end */
+
+/* 上一条，下一条字体 */
+	.textoverflow {
+	  font:15px/30px 'MicroSoft YaHei';
+	}
+
+	/*图书列表2015-11-13*/
+	.newbook_list{
+		/* width:650px; */
+		overflow:hidden;
+		padding-bottom:20px;
+		/* margin-left:8%; */
+		margin-top:15px; 
+		position:relative;
+		font-size:14px;
+		font-family:Microsoft Yahei;
+		color:#000000;
+		line-height:20px;
+		padding: 0 10% 0 13.4%;
+	}
+	.newbook_list li{width: 15.3%; padding: 13px 14px; float:left;overflow: hidden;}
+	.newbook_list li img{ width:100px; height:150px; }
+	
+	/*图书列表*/
+	.bookList{ width:650px; margin-left:75px; margin-top:15px; position:relative; }
+	.bookList li{width:120px; padding:5px; float:left;}
+	.bookList li img{ width:100px; height:150px; }
+	
+	/*地方文献*/
+	.mostlist{padding: 0 12%;}
+	.outermost .top{/* width: 670px; */height: 30px; border-bottom: 3px solid #3C89B7;font-size: 16px;}
+	.top .top_title{float: left;min-width:300px;}
+	.top_btn{float: right;min-width:54px;margin-right: 15px;/* margin-top: 7px; */}
+	.below{margin-left: 43px;margin-top: 7px;width: 620px;line-height: 22px;/* max-height: 150px; */ font-size: 14px;/* text-indent: 23px; */}
+	.below_empty{min-height: 20px;}
+	
+	/* 一点通 */
+	.listDiv_con{font: status-bar;color:#000000;line-height:28px;padding: 0 10%;}
+	.listDiv_con .list_li{float: left;padding: 2% 2%;}
+	.listDiv_con .list_li a{color: #0053a5;font-family: MicroSoft YaHei;font-size: 16px;position: absolute;}
+	.listDiv_con .list_li h4{text-indent: 7px;width: 154px;height: 37px;  border-bottom: 1px solid #EFEFEF;}
+	
+	/* 数字资源导航begin */
+	.db-link {
+	  margin: 0 auto 20px;
+	  margin: 0 23px 20px 23px;
+	  border-radius: 10px;
+	  /* padding: 10px 0 ; */
+	}
+	/* 详情页打开按钮 */
+	.zy_con_openbt{
+		 float:right;
+		 border-radius: 4px;
+		 background-color: #38b4e6;
+		 color: #fff;
+		 text-align: center;
+		 width: 70px;
+		 height: 26px;
+		 line-height: 27px;
+		 margin-right: 2%;
+		 margin-top: 3px;
+	}
+	/*资源提醒*/
+	.zy_tx {
+		background: #F8F8F8;
+  		border: 1px solid #38B4E6;
+		width: 698px;
+		padding: 20px;
+		line-height: 180%;
+		font-size: 12px;
+		color: #333333;
+		overflow: hidden;
+		margin-top: 15px;
+	}
+	
+	.zy_tx a {
+		font-weight: bold;
+		color: #38B4E6;
+	}
+	
+	.zy_tx a:hover {
+		text-decoration: underline;
+	}
+	/* 资源log */
+	.zy_con_logo img {
+		min-width: 55%;
+		max-width: 70%;
+		min-height: 10%;
+		max-height: 130px;
+	}
+	/* 数字资源导航end */
+	/* 服务-图书馆利用常识begin */
+	.r_tab2{
+		background-color:#FDF6EA; 
+		height:90px; 
+		border-top:2px solid  #E2E2E2;
+		border-bottom:2px solid  #E2E2E2;
+		font: status-bar;
+		font-weight: bold;
+	}
+	.classItem{ 
+		float:left; 
+		width:150px; 
+		height:28px; 
+		background-color:#FFF; 
+		border-radius:5px; 
+		text-align:center;
+		font:13px/30px 'MicroSoft YaHei'; 
+		margin-left:10px; 
+		margin-top:10px; 
+		cursor:pointer;
+	}
+	.r_tab2 li.spec{
+		background-color:#EA8847; 
+		color:#FFF;
+	}
+	.classname{
+		width:80px; 
+		height:28px; 
+		background-color:#FFF; 
+		border-radius:5px; 
+		text-align:left;
+		font:14px/30px 'MicroSoft YaHei'; 
+		margin-left:10px; 
+		margin-top:10px; 
+		cursor:pointer;
+	}
+	/* 服务-图书馆利用常识end */
+	
+	/* 栏目列表分类（数字资源导航，新书廊）begin */
+	.db-link {
+	  margin: 0 auto 20px;
+	  margin: 0 23px 20px 23px;
+	  border-radius: 10px;
+	  padding: 10px 0 ;
+	}
+	.zy-list {
+	  overflow: hidden;
+	  list-style: none;
+	  padding-top: 15px;
+	  padding-bottom: 5px;
+	}
+	.zy-list li {
+	  width: 20%;
+	  height: 40px;
+	  float: left;
+	  text-align: center;
+	  margin: 11px 0;
+	  margin-left: 2%;
+	  margin-right: 2%;
+	}
+	.zy-list li a {
+	  line-height: 40px;
+	  font-size: 16px;
+	  text-align: center;
+	  display: block;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  -o-text-overflow: ellipsis;
+	  text-overflow: ellipsis;
+	  border: 1px solid #aaa;
+	  border-radius: 5px;
+	}
+	.zy-list li a.active,
+	.zy-list li a:hover {
+	  color: #fff;
+	  background: url(../images/index/pc/active_bg.jpg) repeat;
+	  border: 1px solid #fff;
+	}
+	/* 栏目列表分类（数字资源导航，新书廊）end */
+
+	/*下载专区*/
+	.download_list{
+		padding: 20px 8%;
+		font-family: MicroSoft YaHei;
+		font-size: 16px;
+	}
+	.download_item .item_top{
+		height: 21px; 
+	/* border-bottom: 3px solid #3C89B7; */
+		background:#efefef;
+		border-radius: 8px;
+		padding: 5px 20px 5px 30px;
+	}
+	.download_item p{padding-bottom: 0px;}
+	.item_title{float: left;}
+	.item_btn{float: right;margin-right: 30px;}
+	.item_below{margin:8px 10px 0px 0px;
+		font-size: 14px;
+		text-indent: 30px;
+	}
+	.item_below_empty{min-height: 30px;}
+	/*下载专区end*/
+	
+	/* zDialog弹窗样式 */
+	.buttonStyle{
+	  	width: 60px;
+	  	background-color: #71C4EE;
+	  	color: #FFFFFF;
+	  	line-height: 25px;
+  		border-radius: 4px;
+	}
+	.dialogCont{
+		 vertical-align:middle;
+		 text-align:center;
+		 padding:0 10px;
+		 height:100px;
+		 width:100%;
+		 font-size: 15px;
+	}
+	/* 创意设计-创意空间-上传作品 */
+	.contentForm{
+		 font: status-bar; 
+		 background: #FAFAFA;
+		 padding-left: 10%;
+	}
+	.tb_td1{
+		width:170px;
+		text-align:right;
+	}
+	.tb_td2{
+		width: 676px;
+	}
+	.lybCon{
+		font-size: 16px;
+	}
+	.lybCon input,textarea,button,select{
+		font-size: 16px;
+	}
+	.lybCon input[type='text'],textarea{
+		border: 1px solid #ccc;
+	}
+	.lybCon .uploadBT{
+		width: 83%;
+		height: 25px;
+		background-color: #fbb100;
+		color: #ffffff;
+		border-radius: 3px;
+	}
+	.lybCon .seePermisBt{
+		width: 10%;
+		background-color: #21B2E0;
+		color: #ffffff;
+		border-radius: 3px;
+	}
+	.lybCon .sub_btn{
+		width:10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #38b4e6;
+	}
+	.lybCon .res_btn{
+		width:10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #FBB100;
+	}
+	.lybCon .imgDiv{
+  		overflow: hidden;
+  		float:left; 
+  		width: 500px;
+  		margin-top: 10px;
+  		margin-bottom: 10px;
+  		background-color: #EEEEEE;
+	}
+	.imgDiv .i1{
+		float: left;
+		width: 40%;
+	}
+	.imgDiv .i2{
+		float: left;
+	}
+	.imgDiv .i2 input {
+	    position: absolute;
+	    opacity: 0;
+	    width: 90px;
+	    top:0;
+	    left:0;
+	    filter: alpha(opacity=0);
+    	cursor: pointer
+	}
+	.file {
+		position: relative;
+		display: inline-block;
+		background: #21B2E0;
+		border-radius: 4px;
+		padding: 2.5px 12px;
+		overflow: hidden;
+		color: #FFFFFF;
+		text-decoration: none;
+		text-indent: 0;
+		line-height: 20px;
+		float: left;
+		margin-right: 10px;
+		margin-top: 10px;
+	}
+	.file:hover {
+	    background: #419BC0;
+	    color: #FFFFFF;
+	    text-decoration: none;
+	}
+	.imgDiv .i3{
+		float: right;
+	}
+	.lybCon .viewImg{
+		color:#bbbbbb;
+	}
+	.lybCon.viewImg img{
+		background-color: #ffffff;
+  		border: 0px solid #ccc;
+  		max-height: 300px;
+  		max-width: 80%;
+	}
+	.lybCon .code{
+		float:left;
+		padding-left:16px;
+	}
+	.lybCon .code img{
+		width: 73px;
+		height: 28px;
+	}
+	/* 创意设计-创意空间-上传作品 end*/
+	/* 视障服务-联系我们 */
+	.svcGuest1{
+		color: #fff;
+		font-size: 15px;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #38b4e6;
+		display: none;
+		width: 8%;
+	}
+	.svcGuest2{
+		color: #fff;
+		font-size: 15px;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #38b4e6;
+		display: none;
+		width: 8%;
+	}
+	/* 视障资源检索 */
+	.svc_search_clearfix{
+		height: 40px;
+		padding: 15px 13%;
+		font-size: 16px;
+	}
+	#divselect2 ul {
+		width: 104px;
+		border: 0px solid #333333;
+		background-color: #F4F4F4;
+		position: absolute;
+		z-index: 20000;
+		margin-top: 5px;
+		display: none;
+	}
+	#divselect2 ul li {
+		height: 34px;
+		line-height: 34px;
+	}
+	#divselect2 ul li a {
+		display: block;
+		height: 34px;
+		color: #666666;
+		text-decoration: none;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-size: 14px;
+	}
+	#divselect2 ul li a:hover {
+		background-color: #fff;
+	}
+	/* 视障资源检索end */
+	/* 找不到数据 */
+	.no_result{
+		font-size: 15px;
+		text-align: center;
+	}
+	/* 参考咨询 */
+	.consult_VIP{
+		padding:4px;
+		line-height:5;
+		font-size: 16px;
+	}
+	.consult_VIP .sub_btn1{
+		width: 10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #38b4e6;
+	}
+	.consult_VIP .sub_btn2{
+		width: 10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #FBB100;
+	}
+	.consult_VIP input,textarea {
+		font-size: 16px;
+	}
+	.consult_VIP .td1{
+		text-align: right;
+	}
+	.cons_details{
+		position:relative;
+		padding: 0 30px;
+	}
+	.cons_details .up_dow_border{
+		border-bottom:4px solid #38B4E6;
+		padding:10px 0px;
+	}
+	.details_con{
+		font-size: 16px;
+		margin: 3% 10%;
+		background: #F9F9F9;
+	}
+	.details_con .td1{
+		text-align: right;
+		width:120px; 
+		line-height:3;
+		background-color:#efefef;
+		border-radius:5px;
+	}
+	.details_con .td2{
+		text-align: right;
+		width:120px; 
+		line-height:3;
+		border-radius:5px;
+	}
+	.cons_details .backBt{
+		margin-left: 45%;
+		margin-top:15px;
+		width: 10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #38b4e6;
+		line-height:30px;;
+		font-size: 16px;
+	}
+	.details_con img{
+		max-height: 200px;
+		max-width: 230px;
+	}
+	/* 视障资源检索end */
+	/* 找不到数据 */
+	.no_result{
+		font-size: 15px;
+		text-align: center;
+	}
+	/* 参考咨询 */
+	.consult_VIP{
+		padding:4px;
+		line-height:5;
+		font-size: 16px;
+	}
+	.consult_VIP .sub_btn1{
+		width: 10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #38b4e6;
+	}
+	.consult_VIP .sub_btn2{
+		width: 10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #FBB100;
+	}
+	.consult_VIP input,textarea {
+		font-size: 16px;
+	}
+	.consult_VIP .td1{
+		text-align: right;
+	}
+	.cons_details{
+		position:relative;
+		padding: 0 30px;
+	}
+	.cons_details .up_dow_border{
+		border-bottom:4px solid #38B4E6;
+		padding:10px 0px;
+	}
+	.details_con{
+		font-size: 16px;
+		margin: 3% 10%;
+		background: #F9F9F9;
+	}
+	.details_con .td1{
+		text-align: right;
+		width:120px; 
+		line-height:3;
+		background-color:#efefef;
+		border-radius:5px;
+	}
+	.details_con .td2{
+		text-align: right;
+		width:120px; 
+		line-height:3;
+		border-radius:5px;
+	}
+	.cons_details .backBt{
+		margin-left: 45%;
+		margin-top:15px;
+		width: 10%;
+		color: #fff;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #38b4e6;
+		line-height:30px;;
+		font-size: 16px;
+	}
+	/* 栏目描述页 */
+	.neirong .ch_txt{
+		border: 0;
+	}
+	/* 图书馆利用常识 */
+	.tsglycs_nav{
+		position: relative;
+		border: 1px solid #38B4E6;
+		background-color: #fff;
+		width: 95.5%;
+		margin: 0 auto;
+		height: 75px;
+	}
+	.tsglycs_nav li{
+		cursor: pointer;
+	}
+	.tsglycs_lv4{
+		position: absolute;
+		border-bottom: 4px solid #ddd;
+		background-color: #FFFFFF;
+		width: 100%;
+	}
+	.tsglycs_lv4 li{
+		  float: left;
+		  margin: 0!important;
+		  line-height: 25px;
+		  padding: 5px 0px;
+		  font-size: 16px;
+		  width: 25%;
+		  font-weight: 600;
+		  text-align: center;
+	}
+	.tsglycs_nav li.active,.tsglycs_nav li.active a{
+		color: #fff;
+		background: #21b2e0 ;
+	}
+	.tsglycs_nav a{
+		display: block;
+	}
+	
+	.tsglycs_lv5{
+		margin-top: 39px;
+		position: absolute;
+		background-color: #FFFFFF;
+		width: 100%;
+	}
+	.tsglycs_lv5 li{
+		float: left;
+		margin: 0!important;
+		line-height: 25px;
+		padding: 5px;
+		font-size: 15px;
+		cursor: pointer;
+	}
+	.tsglycs_lv5 li.active,.tsglycs_lv5 li.active a{
+		color: #429CC1;
+		background: #d7f0fa;
+	}
+	.tsglycs_lv6{
+		margin: 10px auto;
+		display: block;
+		position: relative;
+		background-color: #FFFFFF;
+		width: 95%;
+		line-height: 20px;
+		min-height: 30px;
+		border-top: 1px solid #38B4E6;
+		border-bottom: 1px solid #38B4E6;
+	}
+	.tsglycs_lv6 a.active{
+		color: #429CC1;
+	}

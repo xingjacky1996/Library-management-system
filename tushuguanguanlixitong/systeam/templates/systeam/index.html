@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% load static %}
+<link rel="shortcut icon" type="image/x-icon" href="{% static '/media/images/bitbug_favicon.ico' %}"media="screen" />
+<title>求真图书馆</title>
+	
+<link rel="stylesheet" href="{% static 'media/css/style1.css'%}" />
+
+<link rel="stylesheet" media="print" href="{% static 'media/css/print.css'%}" />
+
+<link rel="stylesheet" href="{% static 'media/css/jquery.jscrollpane.css'%}" />
+<script src="{% static 'media/js/jquery.js'%}"></script>
+<link rel="stylesheet" href="{% static 'media/js/plugin/jquery-ui.css'%}" />
+<script src="{% static 'media/js/plugin/jquery-ui.js'%}"></script>
+<script src="{% static 'media/js/jquery.mousewheel.js'%}"></script>
+<script src="{% static 'media/js/jquery.jscrollpane.min.js'%}"></script>
+<script src="{% static 'media/js/jquery.cycle2.min.js'%}"></script>
+<script src="{% static 'media/js/jquery.cycle2.swipe.js'%}"></script>
+<script src="{% static 'media/js/jquery.jcarousel.min.js'%}"></script>
+<script src="{% static 'media/js/plugin/html5media.js'%}"></script>
+<script src="{% static 'media/js/plugin/jquery.isotope.min.js'%}"></script>
+<link rel="stylesheet" href="{% static 'media/js/plugin/jquery.colorbox.css'%}" />
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_855696_ze3v8oggyo.css">
+<script src="{% static 'media/js/plugin/jquery.colorbox-min.js'%}"></script>
+<script src="{% static 'media/js/swfobject.js'%}"></script>
+<script src="{% static 'media/js/func.js'%}"></script>
+<style>
+.footer .powered{ font-size:12px;}
+.loginbtn{
+	display: flex;
+}
+ul,li{
+	list-style: none;
+}
+
+a:hover{
+	text-decoration:none;
+}
+.error{
+	position: fixed;
+	width: 420px;
+	height: 228px;
+	background-color: rgb(251, 251, 251);
+	border-top: solid #293877 6px;
+	margin:auto;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+	z-index: 999;
+	padding: 0px 18px 8px 18px;
+	border-radius: 8px;
+}
+.m_title{
+	display: flex;
+	justify-content: space-between;
+	font-size: 28px;
+	border-bottom: solid rgb(85, 85, 85) 1px;
+}
+a:hover{
+    text-decoration: none;
+}
+.icon-fork{
+	font-size: 26px;
+}
+.icon-fork:hover{
+	color: #293877;
+}
+#m_box{
+	font-size: 16px;
+	text-align: center;
+	line-height: 160px;
+}
+#button_sure{
+	width: 60px;
+	height: 30px;
+	border: none;
+	border-radius: 6px;
+	background-color: #293877;
+	color: #fff;
+	cursor: pointer;
+}
+#a_sure{
+	width: 60px;
+	height: 30px;
+	margin: 0 0 8px 364px;
+}
+#a_tuichu{
+	color: #293877;
+}
+</style>
+</head>
+<body>
+
+<section class="pbody">
+<aside id="sidebar" class="sidebar">
+	<div class="nav-wrapper">
+		<button class="nav-toggle"><span></span></button>
+		<div class="sidebarinfo">
+			<ul>
+				<li class="li_2">
+					<a href="" class="btn"><span class="ico"></span><span class="t">热线</span></a>
+					<div class="show" style="width:170px">
+						语音：82841200~03<br/>语音/人工：82841211~12
+					</div>
+				</li>
+				<li class="li_3">
+					<a href="" class="btn"><span class="ico"></span><span class="t">移动</span></a>
+					<div class="show">
+						<img src="" alt="" width="80" height="80" />
+						<strong class="t">文献港门户</strong>
+						<img src="" alt="" width="80" height="80" />
+						<strong class="t"></strong>
+					</div>
+				</li>
+				<li class="li_4">
+					<a href="" class="btn"><span class="ico"></span><span class="t">微博</span></a>
+					<div class="show">
+						<img src="" alt="" width="80" height="80" />
+						<strong class="t">新浪微博</strong>
+						<img src="" alt="" width="80" height="80" />
+						<strong class="t">腾讯微博</strong>
+					</div>
+				</li>
+				<li class="li_5">
+					<a href="" class="btn"><span class="ico"></span><span class="t">微信</span></a>
+					<div class="show">
+						<img src="" alt="" width="80" height="80" />
+						<strong class="t">图书馆服务号</strong>
+						<img src="" alt="" width="80" height="80" />
+						<strong class="t">图书馆订阅号</strong>
+					</div>
+				</li>
+				<li class="li_1">
+					<a href="" class="btn"><span class="ico"></span><span class="t">邮件</span></a>
+					<div class="show" style="width:140px">
+						<br/>
+					</div>
+				</li>
+				<li class="li_6">
+					<a href="" target="_blank" class="btn"><span class="ico"></span><span class="t">咨询</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</aside>
+	<header class="header">
+		<div class="headbar">
+			<div class="container">
+				<a href="/" class="brand" style="font-size: 30px; color: #fff; font-weight:bold; font-family:'Courier New', Courier, monospace;">求真图书馆</a>
+				<div class="headrig">
+					<a href="/shuju/" class="szlibdata">图书馆数据</a>
+					<a href="/liaotian/" class="ask">咨询图书馆管理员</a>
+
+					<div class="loginbtn">
+							{% if username == '' and is_staff == False %}
+							<li><a href="/login">登陆</a></li>
+							<li><a href="/zhuce">注册</a></li>
+							{% elif is_staff == True %}
+							<li><a href="/xadmin">{{ username }}</a></li>
+							<li><a href="/loginout">退出登陆</a></li>
+							{% elif is_staff == False %}
+							<li><a href="/reader">{{ username }}</a></li>
+							<li><a href="/loginout">退出登陆</a></li>
+							{% endif %}
+					</div>
+					<a href="/liuyan/" class="liu">给管理员留言</a>
+				</div>
+			</div>
+		</div>
+		<div class="navbar">
+			<div class="container">
+				<nav class="navigation">
+					<ul>
+						<li class="active"><a class="t1" href="/" target="_self">首页</a></li>
+						<li><a class="t1" href="" target="_self">新闻资讯</a>
+							<ul>
+								<li><a href="" target="_self">通知公告</a></li>
+								<li><a href="" target="_self">媒体报道</a></li>
+								<li><a href="" target="_self">专题新闻</a></li>
+								<li><a href="" target="_self">业界动态</a></li>
+							</ul>
+						</li>
+						<li ><a class="t1" href="" target="_self">资源导航</a>
+							<ul>
+								<li><a href="" target="_self">图书</a></li>
+								<li><a href="" target="_self">期刊</a></li>
+								<li><a href="" target="_self">报纸</a></li>
+								<li><a href="" target="_self">数字资源</a></li>
+								<li><a href="" target="_self">音像资料</a></li>
+								<li><a href="" target="_self">特色馆藏</a></li>
+								<li><a href="" target="_self">资源推介</a></li>
+								<li><a href="" target="_self">书单</a></li>
+							</ul>
+						</li>
+						<li><a class="t1" href="" target="_self">服务指南</a>
+							<ul>
+								<li><a href="" target="_self">读者须知与办证指南</a></li>
+								<li><a href="" target="_self">服务区布局</a></li>
+								<li><a href="" target="_self">书刊借阅服务</a></li>
+								<li><a href="" target="_self">网络与数字资源服务</a></li>
+								<li><a href="" target="_self">参考咨询与专题服务</a></li>
+								<li><a href="" target="_self">少儿服务</a></li>
+								<li><a href="" target="_self">阅读推广活动</a></li>
+								<li><a href="" target="_self">语音/电话系统</a></li>
+								<li><a href="" target="_self">移动服务门户</a></li>
+								<li><a href="" target="_self">短信服务平台</a></li>
+								<li><a href="" target="_self">微博/微信</a></li>
+							</ul>
+						</li>
+								<li><a class="t1" href="" target="_self">图书馆网</a>
+									<ul>
+										<li><a href="" target="_self">“图书馆之城”</a></li>
+										<li><a href="" target="_self">“文献港”</a></li>
+										<li><a href="" target="_self">城市街区自助图书馆</a></li>
+										<li><a href="" target="_self">数字图书馆推广工程</a></li>
+										<li><a href="" target="_self">文化信息资源共享工程</a></li>
+										<li><a href="" target="_self">图书馆合作</a></li>
+										<li><a href="" target="_self">地方版文献联合采编协作网</a></li></ul></li>
+								<li><a class="t1" href="" target="_self">关于图书馆</a>
+									<ul>
+										<li><a href="" target="_self">图书馆概况</a></li>
+										<li><a href="" target="_self">参观深图</a></li>
+										<li><a href="" target="_self">机构设置</a></li>
+										<li><a href="" target="_self">理事会</a></li>
+										<li><a href="" target="_self">年度计划</a></li>
+										<li><a href="" target="_self">工作年报</a></li>
+										<li><a href="" target="_self">图书馆概况</a></li>
+										<li><a href="" target="_self">图书馆刊物</a></li>
+										<li><a href="/shuju/" target="_self">图书馆数据</a></li>
+										<li><a href="" target="_self">图书馆章程</a></li>
+										<li><a href="" target="_self">发展规划</a></li>
+										<li><a href="" target="_self">采购公示</a></li></ul>
+								</li>
+						</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+
+	<section class="container">
+		<div class="searchbox">
+			<div class="tabshow">
+				<div class="tabtext">
+					<form action="/searched/" method="GET">
+					
+						<input type="text" name="bookname" class="input" placeholder="检索图书馆的资源"/>
+					
+						<input type="submit" value="搜索" class="submit"/>
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span9">
+				<div class="indbanner">
+					<div class="slide">
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1543215607624.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1514274002815.jpg" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541491717936.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="#" target="_self"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492577793.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492675684.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492858458.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492873650.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492893149.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492947709.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492969550.png" alt="" width="605" height="300" /></a></div>
+						
+							<div class="item"><a href="" target="_blank"><img src="https://www.szlib.org.cn/UserFiles/indexBanner/upload-orig/1541492987232.png" alt="" width="605" height="300" /></a></div>
+						
+					</div>
+					<ul class="indimgtab">
+						<li class="item_1">
+							<a href="">
+								<span class="img">
+									<img src="" alt="" />
+									<img src="" alt="" />
+								</span>
+								<span class="t">讲座</span>
+							</a>
+						</li>
+						<li class="item_2">
+							<a href="">
+								<span class="img">
+									<img src="" alt="" />
+									<img src="" alt="" />
+								</span>
+								<span class="t">活动</span>
+							</a>
+						</li>
+						<li class="item_3">
+							<a href="">
+								<span class="img">
+									<img src="" alt="" />
+									<img src="" alt="" />
+								</span>
+								<span class="t">艺苑</span>
+							</a>
+						</li>
+						<li class="item_4">
+							<a href="">
+								<span class="img">
+									<img src="" alt=""/>
+									<img src="" alt=""/>
+								</span>
+								<span class="t">展览</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<article class="row indmainbox_out">
+					<div class="span3">
+						<div class="indmainbox indmainbox_1">
+							<div class="box_in box_in_1">
+								<h2 class="boxtitle"><span class="ico ico_1"></span>服务时间</h2>
+								<div class="boxtext">
+									网上图书馆、自助图书馆全天候服务：（0:00至24:00）<br />
+									南书房、讲读厅：周一至周日7:00-23:00<br />
+									周二至周日主馆舍开放时间：<br />
+									一楼至四楼：9:00-21:00<br />	
+									五楼至六楼：9:00-17:00<br />
+									少儿服务区：周二至周五12:00(周末10:00)-18:00<br />
+									逢周一内务整理，主馆舍不开放。
+								</div>
+								<a href="" class="btn">了解详情</a>
+							</div>
+							<div class="box_in box_in_3">
+								<div class="title_2"><strong class="t">馆舍布局</strong></div>
+								<div class="tab_2">
+									<div class="tab_2_tit">
+										<a href="" class="cur">1<span class="f">楼</span></a>
+										<a href="">2<span class="f">楼</span></a>
+										<a href="">3<span class="f">楼</span></a>
+										<a href="">4<span class="f">楼</span></a>
+										<a href="">5<span class="f">楼</span></a>
+										<a href="">6<span class="f">楼</span></a>
+									</div>
+									<div class="tab_2_show">
+										<div class="tab_2_text" style="display:block;">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中文报纸阅览区、中文期刊阅览区、期刊外借区、视障阅览室、少儿服务区、南书房、一楼展厅、讲读厅。
+										</div>
+										<div class="tab_2_text">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中文图书借阅区（二楼）、外文图书借阅区、主题图书区、总服务台、自助办证区、捐赠换书中心、二楼展厅。
+										</div>
+										<div class="tab_2_text">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中文图书借阅区（三楼）。
+										</div>
+										<div class="tab_2_text">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络信息空间、数字学习空间、音像资料借阅区、爱来吧i-lib、无线网络服务区、创客空间。
+										</div>
+										<div class="tab_2_text">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;艺术设计区、世界文化区、两岸四地法律区、参考工具书区、报告厅。
+										</div>
+										<div class="tab_2_text">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保障本服务区、深圳地方文献专区、深圳学派文献专区、港澳台文献专区、政府信息公开查询专区、古籍查阅服务台。
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="box_in box_in_2">
+								<div class="title_2"><strong class="t">交通指南</strong><a href="" class="more">更多</a></div>
+								<div class="text">
+									<div class="item"><span class="label">公车站：</span>儿童医院、市民中心西站、莲花山公园站、市民中心站</div>
+									<div class="item"><span class="label">地铁站：</span>少年宫站D出口、市民中心站C出口、福田站31出口、莲花西站B出口</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="indmainbox indmainbox_2">
+							<div class="box_in box_in_1">
+								<h2 class="boxtitle"><span class="ico ico_2"></span>服务推介</h2>
+								<div class="boxtext">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实行“全面开放、免证进馆、分层管理、一卡通行”方式，全面推行自助服务。 “图书馆之城”统一服务、自助图书馆网提供了便利的服务，“深圳文献港”及其移动门户打造了数字资源共享平台。
+								</div>
+								<a href="/service-guide.html" class="btn">更多服务</a>
+							</div>
+							<div class="box_in box_in_2" style="height:462px">
+								<dl class="dtlist_1">
+									<dt><a href=""><strong>城市街区自助图书馆</strong></a></dt>
+
+									<dt><a href=""><strong>少儿服务</strong></a></dt>
+
+									<dt><a href=""><strong>预借服务</strong></a></dt>
+ 									
+ 									<dt><a href=""><strong>文献转借服务</strong></a></dt>
+ 									
+ 									<dt><a href=""><strong>新书直通车服务</strong></a></dt>
+
+									<dt><a href=""><strong>移动服务</strong></a></dt>
+
+
+									<dt><a href=""><strong>短信服务</strong></a></dt>
+
+	
+									<dt><a href=""><strong>文献传递</strong></a></dt>
+						
+									<dt><a href=""><strong>定题服务</strong></a></dt>
+									<dt><a href=""><strong>深圳捐赠换书中心</strong></a></dt>								
+									<dt><a href=""><strong>数字资源馆外访问</strong></a></dt>
+									<dt><a href=""><strong>馆外调阅服务</strong></a></dt>
+									<dt><a href=""><strong>政府信息公开查询</strong></a></dt>
+								</dl>
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="indmainbox indmainbox_3">
+							<div class="box_in box_in_1">
+								<h2 class="boxtitle"><span class="ico ico_3"></span>常用资源</h2>
+								<div class="boxtext">
+									本馆2016年累计馆藏资源近900万册、件，其中纸质文献480万册，中外文报刊6000种，音像资料14万件，引进电子数据库30余个，提供港台、时装和深圳地方文献等特色文献服务。
+								</div>
+								<a href="l" class="btn">更多资源</a>
+							</div>
+							<div class="box_in box_in_2">
+								<dl class="dtlist_2">
+									<dt><a href=""><strong>数字资源</strong><span class="ico"></span></a><a href="" style="float:right;font-size:12px" class="btn">更多</a></dt>
+									<dd>
+										<ul class="list_4">
+											<li><a href="" target="_blank">“深圳记忆”专题数据库</a></li>
+											<li><a href="" target="_blank">自建专题资源</a></li>
+											<li><a href="">CNKI中国知网</a></li>
+											<li><a href="">维普考试资源系统</a></li>
+											<li><a href="">台湾学术在线</a></li>
+											<li><a href="">超星书世界</a></li>
+											<li><a href="">新东方多媒体学习库</a></li>
+											<li><a href="">网上报告厅</a></li>
+											<li><a href="">龙源电子期刊</a></li>
+											<li><a href="">EBSCOHost数据库</a></li>
+											<li><a href="" target="_blank">广东省地方特色资源</a></li>									
+										</ul>
+									</dd>
+									<dt><a href=""><strong>特色馆藏</strong><span class="ico"></span></a></dt>
+									<dd>
+										<ul class="list_4">
+											<li><a href="">艺术设计区文献</a></li>
+											<li><a href="">港澳台文献</a></li>
+											<li><a href="">深圳学派文献</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</article>
+
+			</div>
+			<div class="span3 rightside">
+					<div class="sideitem">
+						<div class="sidebox_1">
+							
+							<div class="boxtitle"><strong class="t">通知公告</strong><a href="/gonggao_all/" class="more">更多</a></div>
+							<div class="boxtext">
+								
+								<ul class="list_1">
+									{% for i in gonggao %}
+									
+									<li><a href="{% url 'systeam:gonggao' id=i.id %}">{{ i.content }}</a><span class="date">{{ i.c_time }}</span></li>
+																	
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+
+						<div class="sidebox_1">
+							
+							<div class="boxtitle"><strong class="t">留言板</strong><a href="/liuyanban_all/" class="more">更多</a></div>
+							<div class="boxtext">
+								
+								<ul class="list_1">
+									{% for i in liuyanban_all %}
+									
+									<li>
+										<a href="{% url 'systeam:liuyanban' id=i.id %}">{{ i.content | safe }}</a>
+										<span class="date">{{ i.u_name }}</span>
+										<span>{{ i.c_time }}</span></li>
+																	
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="sideitem">
+						<dl class="sidedl sidedl_1">
+							<dt><strong>深圳市“图书馆之城”</strong><span class="ico"></span></dt>
+							<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2003年起步的深圳市“图书馆之城”建设已在全市构建起一个资源丰富、设施先进、服务便利的图书馆网络，实现了市、区、街道、社区几百家图书馆及自助图书馆的一证通行、通借通还。<br><span class="view">[<a href="">查看</a>]</span></dd>
+
+							<dt><strong>“深圳文献港”</strong><span class="ico"></span></dt>
+							<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以“合作、共享、整合、开放”为宗旨,深圳图书馆、深圳科技图书馆、深圳大学图书馆等联合创建的集数字资源统一发现、读者统一认证、联合文献传递为一体的数字图书馆门户网站。<br><span class="view">[<a href="">查看</a>]</span></dd>
+
+							<dt><strong>粤港澳图书馆合作</strong><span class="ico"></span></dt>
+							<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每年轮流举行的粤港澳文化合作会议都将粤港澳图书馆的交流和合作作为一个专题讨论，以 推进三地图书馆的资源共享与合作，已形成书目统一检索、活动联动、联合咨询等项目的互动。<br><span class="view">[<a href="">查看</a>]</span></dd>
+						</dl>
+					</div>
+
+					<div class="sideitem indsidedl">
+						<dl class="sidedl">
+							<dt><a href=""><strong>《公共图书馆》杂志</strong><span class="ico"></span></a></dt>
+							<dd style="display:none;"></dd>
+							<dt><a href=""><strong>《行走南书房》刊物</strong><span class="ico"></span></a></dt>						
+							<dd style="display:none;"></dd>
+						</dl>
+					</div>
+
+					<div class="sideitem">
+						<div class="sidebox_2">
+							<div class="boxtext boxtext_2">
+								<ul class="list_externallink">
+									<li><a href="" target="_blank"> 数字图书馆推广工程</a></li>
+									<li><a href="" target="_blank"> 文化信息资源共享工程</a></li>
+									<li><a href="" target="_blank"> 中国古籍保护网</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="sideitem">
+						<div class="sidebox_2">
+							<div class="boxtext boxtext_2" style="height:226px">
+								<ul class="list_externallink">
+									<li><a href="" target="_blank">深圳图书情报学会</a></li>
+									<li><a href="" target="_blank"> 中图学会阅读推广委员会</a></li>
+									<li><a href="http://publiclib.szlib.org.cn/" target="_blank"> 公共图书馆研究院</a></li>
+									<li><a href="http://www.lib-read.org/" target="_blank">全民阅读</a></li>
+									<li><a href="page/CRLNet.html" target="_blank">地方版文献联合采编协作网</a></li>
+									<li><a href="http://www.ilas.com.cn/" target="_blank">ILAS图书馆管理系统</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+			</div>
+		</div>
+
+	</section>
+	<footer class="footer">
+		<div class="container">
+			<div class="footbox_1">
+				<div class="footlink">
+					
+					<a href="" >网上调查</a>      
+					
+					<a href="" >网站地图</a>      
+					
+					<a href="" >法律声明</a>      
+					
+				</div>
+				<div class="copy">Copyright©2008-2014 深圳图书馆<br />版权所有 <a href="" target="_blank">粤ICP备08025529号</a></div>
+				<div class="supervise" style="width:330px">
+					<a href="" target="_blank"><img src="" alt="" /></a>
+					<a href="" target="_blank"><img src="" alt="" /></a>
+					<a href="" target="_blank"><img src="" alt="" /></a>
+					<span id="_ideConac">
+						<a href="" target="_blank">
+							<img id="imgConac" src="" border="0" vspace="0" hspace="0" data-bd-imgshare-binded="1">
+						</a>
+					</span>
+				</div>
+			</div>
+			<div class="footbox_2">
+				<div class="boxtitle">相关网站</div>
+				<div class="boxtext">
+					
+					<a href="" target="_blank">国家图书馆</a><br />
+					
+					<a href="" target="_blank">省立中山图书馆</a><br />
+					
+					<a href="" target="_blank">深圳市科技图书馆</a><br />
+					
+					<a href="" target="_blank">深圳少儿图书馆</a><br />
+					
+					<a href="" target="_blank">香港公共图书馆</a><br />
+					
+					<a href="" target="_blank">澳门公共图书馆</a><br />
+					
+				</div>
+			</div>
+			<div class="footbox_3">
+				<div class="boxtitle">常用网站</div>
+				<div class="boxtext">
+					
+					<a href="" target="_blank">深圳之窗</a><br />
+					
+					<a href="" target="_blank">广东省文化馆</a><br />
+					
+					<a href="" target="_blank">广东文化网</a><br />
+					
+					<a href="" target="_blank">深圳市人大常委会</a>
+					
+				</div>
+			</div>
+			<div class="footbox_4">
+				
+				<div class="boxtitle">联系方式</div>
+				<div class="boxtext">
+					<p>地址：广东省深圳市福田区福中一路2001号<br /> 邮政编码：518036<br /> 咨询电话：(0755) 82841211 / 82841212 <br /> 邮箱：reference@szlib.org.cn</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	{% if messages %}
+
+	<ul class="messages">
+
+	{% for message in messages %}
+
+
+		<li{%if message.tags %} class="{{ message.tags }}"{% endif %}>
+			<div class="m_title">
+				{{ message.tags }}
+				<a href="" id="a_tuichu">
+					<i class="iconfont icon-fork"></i>
+				</a>
+			</div>
+			<div id="m_box">
+				{{ message }}
+			</div>
+			<a href="" id="a_sure">
+				<button id="button_sure">
+				确认
+				</button>
+			</a>
+		</li>
+
+	{% endfor %}
+
+	</ul>
+
+	{% endif %}
+</section>
+</body>
+<script>
+	$(function(){
+
+		$('.indbanner .slide').after('<div class="ctrl">').cycle({
+			fx: 'scrollHorz',
+			slides:' .item',
+			timeout: 5000,
+			pager:'.indbanner .ctrl',
+			pagerEvent: 'mouseover',
+			swipe:true,
+			
+			slideResize: true,
+			containerResize: true,
+			width: '100%',
+			height: '100%',
+			fit:1,
+			log:false
+		});
+
+		$(".tab_2_tit a").mouseover(function () {
+			var index = $(".tab_2_tit a").index(this);
+			$('.tab_2_tit a').eq(index).addClass('cur').siblings().removeClass('cur');
+			$('.tab_2_show .tab_2_text').eq(index).show().siblings().hide();
+			return false;
+		}).focus(function(){this.blur();});
+		$('.sidedl_1 > dt').click(function(){
+			$(this).toggleClass('cur').siblings().removeClass('cur');
+			$(this).next('dd').slideToggle().siblings('dd:visible').slideUp();
+		});
+	})
+
+</script>
+</html>

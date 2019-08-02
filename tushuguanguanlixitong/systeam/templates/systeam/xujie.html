@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/media/images/bitbug_favicon.ico' %}"media="screen" />
+    <script src="{% static 'media/js/jquery.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'media/css/style1.css'%}" />
+    <title>续借界面</title>
+</head>
+<style>
+    #tan{
+        width: 800px;
+        height: 550px;
+        position: absolute;
+        background-color: #E2DBBE;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin:auto;
+        border-radius: 10px;
+        font-size: 20px;
+    }
+    .loginbtn{
+        display: flex;
+    }
+    ul,li{
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+<body>
+        <div class="headbar">
+                <div class="container">
+                    <a href="/" class="brand" style="font-size: 30px; color: #fff; font-weight:bold; font-family:'Courier New', Courier, monospace;">求真图书馆</a>
+                    <div class="headrig">
+                        <a href="/shuju/" class="szlibdata">图书馆数据</a>
+                        <a href="/liaotian/" class="ask">问图书馆员</a>
+    
+                        <div class="loginbtn">
+                                {% if username == '' and is_staff == False %}
+                                <li><a href="/login">登陆</a></li>
+                                <li><a href="/zhuce">注册</a></li>
+                                {% elif is_staff == True %}
+                                <li><a href="/admin">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% elif is_staff == False %}
+                                <li><a href="/reader">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% endif %}
+                        </div>
+                        <a href="/liuyan/" class="liu">给管理员留言</a>
+                    </div>
+                </div>
+            </div>
+    <div id='tan'>
+        <span>您要续借多少天呢？请将天数输入下面的输入框</span>
+        <input type="text" id="xujietime">
+        <button id="submit">确认借阅</button>
+        <div id="h_time">{{ h_time }}</div>
+    </div>
+    
+</body>
+<script>
+</script>
+</html>

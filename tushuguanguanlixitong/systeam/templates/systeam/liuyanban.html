@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/media/images/bitbug_favicon.ico' %}"media="screen" />
+    <link rel="stylesheet" href="{% static 'media/css/style1.css'%}" />
+    <title>求真图书馆·留言板</title>
+    
+</head>
+<style>
+    ul,li{
+	list-style: none;
+    }
+    .loginbtn{
+        display: flex;
+    }
+</style>
+<body>
+        <div class="headbar">
+                <div class="container">
+                    <a href="/" class="brand" style="font-size: 30px; color: #fff; font-weight:bold; font-family:'Courier New', Courier, monospace;">求真图书馆</a>
+                    <div class="headrig">
+                        <a href="/shuju/" class="szlibdata">图书馆数据</a>
+                        <a href="/liaotian/" class="ask">询问图书馆员</a>
+    
+                        <div class="loginbtn">
+                                {% if username == '' and is_staff == False %}
+                                <li><a href="/login">登陆</a></li>
+                                <li><a href="/zhuce">注册</a></li>
+                                {% elif is_staff == True %}
+                                <li><a href="/admin">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% elif is_staff == False %}
+                                <li><a href="/reader">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% endif %}
+                        </div>
+
+                        <a href="/liuyan/" class="liu">给管理员留言</a>
+                    </div>
+                </div>
+            </div>
+    {% for i in t %}
+
+    {{ i.content | safe }}
+    {{ i.u_name }}
+    {{ i.c_time }}
+
+    {% endfor %}
+</body>
+</html>

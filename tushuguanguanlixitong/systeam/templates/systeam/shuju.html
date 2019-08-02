@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/media/images/bitbug_favicon.ico' %}"media="screen" />
+    <script src="{% static 'media/js/jquery.js'%}"></script>
+    <script src="{% static 'media/js/echarts.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'media/css/style1.css'%}" />
+    <title>图书馆数据</title>
+</head>
+<style>
+    a:hover{
+        text-decoration: none;
+    }
+    .loginbtn{
+        display: flex;
+    }
+    li{
+        list-style: none;
+    }
+    #display_all{
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
+<body>
+        <div class="headbar">
+                <div class="container">
+                    <a href="/" class="brand" style="font-size: 30px; color: #fff; font-weight:bold; font-family:'Courier New', Courier, monospace;">求真图书馆</a>
+                    <div class="headrig">
+                        <a href="/shuju/" class="szlibdata">图书馆数据</a>
+                        <a href="/liaotian/" class="ask">问图书馆员</a>
+    
+                        <div class="loginbtn">
+                                {% if username == '' and is_staff == False %}
+                                <li><a href="/login">登陆</a></li>
+                                <li><a href="/zhuce">注册</a></li>
+                                {% elif is_staff == True %}
+                                <li><a href="/admin">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% elif is_staff == False %}
+                                <li><a href="/reader">{{ username }}</a></li>
+                                <li><a href="/loginout">退出登陆</a></li>
+                                {% endif %}
+                        </div>
+                        <a href="/liuyan/" class="liu">给管理员留言</a>
+                    </div>
+                </div>
+            </div>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="display_all">
+        <div id="user_num" style="width: 400px;height:300px;"></div>
+        <div id="book_num" style="width: 400px;height:300px;"></div>
+        <div id="book_cate_num" style="width: 1400px;height:400px;"></div>
+        <div id="book_cate_pri" style="width: 1000px;height:800px;"></div>
+    </div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var user_num = echarts.init(document.getElementById('user_num'));
+        var book_num = echarts.init(document.getElementById('book_num'))
+        var book_cate_num = echarts.init(document.getElementById('book_cate_num'))
+        var book_cate_pri = echarts.init(document.getElementById('book_cate_pri'))
+
+        // 指定图表的配置项和数据
+        var option1 = {
+            title: {
+                text: '图书馆用户数量'
+            },
+            tooltip: {},
+            legend: {
+                data:['数量']
+            },
+            xAxis: {
+                data: ["图书馆用户数量"]
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: ['{{ user_num }}']
+            }]
+        };
+
+        var option2 = {
+            title: {
+                text: '图书馆藏书数量'
+            },
+            tooltip: {},
+            legend: {
+                data:['数量']
+            },
+            xAxis: {
+                data: ["图书馆藏书数量"]
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: ['{{ book_num_a }}']
+            }]
+        };
+
+        var option3 = {
+            title: {
+                text: '图书馆每种书数量'
+            },
+            tooltip: {},
+            legend: {
+                data:['数量']
+            },
+            xAxis: {
+                data: ["社科","文艺","经济","法律","古籍","艺术","科技","计算机","医药卫生","生活","建筑","少儿","教辅","外文","音像","音乐","杂志"]
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: ['{{ sk_num }}','{{ wy_num }}','{{ jj_num }}','{{ fl_num }}','{{ gj_num }}','{{ ys_num }}','{{ kj_num }}','{{ jsj_num }}','{{ yy_num }}','{{ sh_num }}','{{ jz_num }}','{{ se_num }}','{{ jf_num }}','{{ ww_num }}','{{ yx_num }}','{{ mu_num }}','{{ zz_num }}']
+            }]
+        };
+
+        var option4 = {
+            series : [
+                {
+                name: '图书馆每种书所占比例',
+                type: 'pie',
+                radius: '60%',
+                data:[
+                    {value:'{{ sk_num }}', name:'社科'},
+                    {value:'{{ wy_num }}', name:'文艺'},
+                    {value:'{{ jj_num }}', name:'经济'},
+                    {value:'{{ fl_num }}', name:'法律'},
+                    {value:'{{ gj_num }}', name:'古籍'},
+                    {value:'{{ ys_num }}', name:'艺术'},
+                    {value:'{{ kj_num }}', name:'科技'},
+                    {value:'{{ jsj_num }}', name:'计算机'},
+                    {value:'{{ yy_num }}', name:'医药卫生'},
+                    {value:'{{ sh_num }}', name:'生活'},
+                    {value:'{{ jz_num }}', name:'建筑'},
+                    {value:'{{ se_num }}', name:'少儿'},
+                    {value:'{{ jf_num }}', name:'教辅'},
+                    {value:'{{ ww_num }}', name:'外文'},
+                    {value:'{{ yx_num }}', name:'音像'},
+                    {value:'{{ mu_num }}', name:'音乐'},
+                    {value:'{{ zz_num }}', name:'杂志'}
+                    ]
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        user_num.setOption(option1)
+        book_num.setOption(option2)
+        book_cate_num.setOption(option3)
+        book_cate_pri.setOption(option4)
+    </script>
+</body>
+</html>

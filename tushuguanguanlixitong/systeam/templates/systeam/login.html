@@ -1,0 +1,190 @@
+<html>
+<head>
+<meta charset="utf-8" />
+{% load static %}
+<link rel="shortcut icon" type="image/x-icon" href="{% static '/media/images/bitbug_favicon.ico' %}"media="screen" />
+<link rel="stylesheet" href="{% static 'media/css/index.css' %}">
+
+<meta name="Keywords" content="深圳图书馆" />
+<meta name="Description" content="深圳图书馆" />
+<meta name="Author" content="Shenzhen Doocom Technology Co., Ltd. http://www.doocom.cn, Nov 2015" />
+<meta name="robots" content="index,follow,noodp,noydir" />
+
+<title>求真图书馆·登录</title>
+
+<script type="text/javascript" src="{% static 'media/js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'media/js/jquery.md5.js' %}"></script>
+<script type="text/javascript" src="{% static 'media/js/func.js' %}"></script>
+
+
+<link rel="stylesheet" href="{% static 'media/css/style.css' %}" />
+<link rel="stylesheet" href="{% static 'media/css/swiper.css' %}" />
+
+
+<script src="{% static 'media/js/swiper.min.js' %}"></script>
+<link href="{% static 'media/js/all.css' %}" />
+<script src="{% static 'media/js/icheck.min.js' %}"></script>
+<script src="{% static 'media/js/func.js' %}"></script>
+<!-- 如果用户的浏览器不支持cookie,javascript和ajax的话显示错误信息给用户 -->
+<!--    Detect    support    for    cookies    and    Ajax    and    display    message    if    not    -->            
+<div    id="supportError">
+        <noscript>
+            <div style="font-size:19px;color:red">系统检测到您的浏览器不支持Javascript。
+            本网站需要浏览器支持JavaScript，
+            请调整您的浏览器设置后重试,
+            否则部分功能将不能正常使用。</div>
+        </noscript>
+
+</div>
+
+<script type="text/javascript">
+var count=0;
+
+function loadimage(){ 
+	document.getElementById("randImage").src = "image.jsp?"+Math.random(); 
+} 
+
+function check()
+{	
+	if(document.ff.username.value=="" || document.ff.password.value=="")
+	{
+		alert("请输入完整的用户名和密码！");
+			
+	}
+}
+
+function LostCode()
+{
+	if(document.ff.username.value=="")
+	{
+		alert("请输入用户名！");
+		return false;
+	}
+	else 
+	{
+		document.ff.action="Enter-Lost-CodeN.jsp";
+		document.ff.submit();
+	}
+}
+
+</script>
+
+
+
+<style type="text/css">
+html{ height:100%;}
+</style>
+</head>
+<body>
+
+<div class="pbody page_loading">
+	<div class="loginpage">
+		<div class="header">
+			<div class="mainwidth">
+				<a href="/" class="logo" style="padding:0"><img src="{% static 'media/images/logo.png' %}" alt=""></a>
+			</div>
+		</div>
+		<div class="login">
+			<div class="mainwidth">
+				<div class="title">登陆我的图书馆</div>
+				<div class="login-box">
+					<div class="login-text">
+						<div class="login-title">温馨提示</div>
+						<div class="text-l">
+							<span class="num">1</span>
+							如果您是持有本馆读者证的读者，可直接使用读者证号与密码或者登录名与密码（密码缺省为8位出生年月日）即可进入系统。
+						</div>
+						<div class="text-l">
+								<span class="num">2</span>
+								如果您希望得到文献外借、定题服务等，请与本馆有关部门联系，首先成为本馆正式读者！
+						</div>
+						<div class="text-l">
+								<span class="num">3</span>
+								如果您想“预借登记”图书，请先“登录我的图书馆”点击查看“预借服务规则”。
+						</div>
+						<div class="text-l">
+								<span class="num">4</span>
+								如果您只是进行一般性查询可不必登录！
+						</div>
+					</div>
+					<div class="login-right">
+						<ul class="loginbar">
+							<li class="cur"><a href="#">密码登录</a></li>
+						
+							<li><a href="#">扫码登录</a></li>
+						</ul>
+						<div class="box">
+							
+								<div class="box-in box-on">
+									<form action="/login/" method="POST">
+									
+										{% csrf_token %}
+										
+										<div class="box-input">
+											用户名：{{ form.username }}{{ form.errors.name.0 }}
+										</div>
+
+										<div class="box-input">
+											密&nbsp&nbsp&nbsp码：{{ form.password }}{{ form.errors.password.0 }}
+										</div>
+
+										<div id="auth"  style="display:none" align="left"  style="width:60px; height:25px">
+
+										</div>
+										{{ form.non_field_errors }}
+										<input type="submit" class="input-button" style="cursor:hand"/>
+									</form>
+								</div>	
+									<div class="forget">
+										<input type="checkbox" class="input-checkbox" />下次自动登录
+										<p class="forget_pw">还没有账号？<a href="/zhuce/">立即注册</a></p>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footerl">Copyright. 2010 -- 2019 All Rights Reserved.</div>
+	</div>
+	
+</div>
+
+
+<script>
+$(function(){
+    $("#username").focus();  
+    
+	var i=0;
+	if(i==0){
+		$(".loginbar li:nth-child(1)").click(function(){
+			$(this).addClass("cur").siblings().removeClass("cur");
+			$(".box .box-in:nth-child(1)").addClass("box-on").siblings().removeClass("box-on");
+		    $("#username").focus();  
+			
+		});
+		i=1;
+	}
+  if(i==1){
+		$(".loginbar li:nth-child(2)").click(function(){
+	        $(this).addClass("cur").siblings().removeClass("cur");
+			$(".box .box-in:nth-child(2)").addClass("box-on").siblings().removeClass("box-on");
+			
+			$("#qr").attr("src","image4qr.jsp?"+new Date().getTime());             
+            abc=setInterval('checkqrlogin()',2000);//每2000毫秒执行一遍
+			
+			
+		});
+		i=0;
+	}
+})
+
+
+
+var abc;
+var qrcount=0;
+
+</script>
+
+</body>
+</html>
